@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabores da Terra</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1 id="main-title">Sabores da Terra</h1>
+        <p>Reserve sua experiência gourmet conosco!</p>
+    </header>
+    <main>
+        <form id="reservation-form">
+            <h2>Formulário de Reserva</h2>
+
+            <!-- Dados pessoais -->
+            <label for="name">Nome completo</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phone">Telefone</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <!-- Data e horário -->
+            <label for="date">Data</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="time">Horário</label>
+            <input type="time" id="time" name="time" required>
+
+            <!-- Escolha de mesa -->
+            <label for="table">Selecione sua mesa</label>
+            <select id="table" name="table" required>
+                <option value="">Escolha uma opção</option>
+                <option value="1">Mesa para 1 pessoa</option>
+                <option value="2">Mesa para 2 pessoas</option>
+                <option value="3">Mesa para 3 ou mais pessoas</option>
+                <option value="4">Mesa ao lado da janela</option>
+            </select>
+
+            <!-- Preferências gastronômicas -->
+            <label for="preferences">Preferências gastronômicas ou restrições</label>
+            <textarea id="preferences" name="preferences" rows="4" placeholder="Exemplo: Sem glúten, sem lactose..."></textarea>
+
+            <!-- Ocasião especial -->
+            <label for="special">Ocasião especial</label>
+            <select id="special" name="special">
+                <option value="">Escolha uma opção</option>
+                <option value="aniversario">Aniversário</option>
+                <option value="romantica">Data romântica</option>
+                <option value="outros">Outros</option>
+                <option value="nenhuma">Nenhuma</option>
+            </select>
+
+          <!-- Slider -->
+<label for="range-slider">Número de convidados</label>
+<input type="range" id="range-slider" name="guests" min="1" max="10" step="1" oninput="updateSliderValue(this.value)">
+<p id="slider-value">1</p>
+<script>
+    function updateSliderValue(value) {
+        document.getElementById("slider-value").textContent = value;
+    }
+</script>
+
+            <!-- Botão de envio -->
+            <button type="submit" id="submit-button">Enviar Reserva</button>
+        </form>
+
+        <div id="confirmation" class="confirmation-screen" style="display: none;">
+    <div class="confirmation-content">
+        <h2>Reserva Confirmada!</h2>
+        <p><strong>Nome:</strong> <span id="conf-name"></span></p>
+        <p><strong>Email:</strong> <span id="conf-email"></span></p>
+        <p><strong>Telefone:</strong> <span id="conf-phone"></span></p>
+        <p><strong>Data:</strong> <span id="conf-date"></span></p>
+        <p><strong>Horário:</strong> <span id="conf-time"></span></p>
+        <p><strong>Mesa:</strong> <span id="conf-table"></span></p>
+        <p><strong>Preferências:</strong> <span id="conf-preferences"></span></p>
+        <p><strong>Ocasião especial:</strong> <span id="conf-special"></span></p>
+        <p><strong>Número de convidados:</strong> <span id="conf-guests"></span></p>
+        <button id="back-button">Voltar à tela principal</button>
+    </div>
+</div>
+
+    </main>
+
+    <script>
+        document.getElementById('reservation-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Coleta os valores dos inputs
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const table = document.getElementById('table').selectedOptions[0].text;
+            const preferences = document.getElementById('preferences').value;
+            const special = document.getElementById('special').selectedOptions[0].text;
+            const guests = document.getElementById('range-slider').value;
+
+            // Atualiza os elementos de confirmação
+            document.getElementById('conf-name').textContent = name;
+            document.getElementById('conf-email').textContent = email;
+            document.getElementById('conf-phone').textContent = phone;
+            document.getElementById('conf-date').textContent = date;
+            document.getElementById('conf-time').textContent = time;
+            document.getElementById('conf-table').textContent = table;
+            document.getElementById('conf-preferences').textContent = preferences;
+            document.getElementById('conf-special').textContent = special;
+            document.getElementById('conf-guests').textContent = guests;
+
+            // Exibe a tela de confirmação e oculta o formulário
+            document.getElementById('reservation-form').style.display = 'none';
+            document.getElementById('confirmation').style.display = 'block';
+        });
+
+        document.getElementById('back-button').addEventListener('click', function() {
+            // Oculta a tela de confirmação e exibe o formulário novamente
+            document.getElementById('confirmation').style.display = 'none';
+            document.getElementById('reservation-form').style.display = 'block';
+        });
+    </script>
+</body>
+</html>
